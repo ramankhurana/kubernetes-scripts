@@ -1,13 +1,30 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: creating-dirs
+  name: creating-dirs-bash-v15
 spec:
   template:
+    metadata:
+      name: creating-dirs-pod
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: In
+                values:
+                - wcdl2
       containers:
         - name: creator-container
-          image: creatorImage
-          command: ["echo", "Hello, Kubernetes!"]
+          image: bash #ubuntu
+          #command: ["sh", "-c", "ls -lahtr"]
+          command: ["sh", "-c"]
+          args: 
+          - |
+            ls -lhtr 
+            echo "Hell World!!"
+
       restartPolicy: Never
 
