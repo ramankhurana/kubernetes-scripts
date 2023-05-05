@@ -1,21 +1,18 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: creating-dirs-bash-v20
+  name: creating-dirs-bash-node-selector-v07
 spec:
   template:
     metadata:
       name: creating-dirs-pod
     spec:
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: kubernetes.io/hostname
-                operator: In
-                values:
-                - wcdl2
+      nodeSelector:
+        refit: enabled
+      volumes:
+        - name: data-mnt5
+          hostPath:
+            path: /mnt5
       containers:
         - name: creator-container
           image: bash #ubuntu
@@ -23,24 +20,26 @@ spec:
           command: ["sh", "-c"]
           args: 
           - |
+            df
             ls -lhtr /mnt5
-            mkdir  -p /mnt5/refit/r1
+            mkdir  -p /mnt5/refit/r3
             chmod 777 /mnt5
             chmod 777 /mnt5/refit/  
-            chmod 777 /mnt5/refit/r1  
+            chmod 777 /mnt5/refit/r3  
             ls -lhtr /mnt5
             for i in $(seq 1 32)
             #for ((i=1; i<=31; i++))
             #for i in {1..31}
             do
-              echo "Creating folder /mnt5/refit/r1/vol-$i"
-              mkdir /mnt5/refit/r1/vol-$i 
-              chmod -R 777 /mnt5/refit/r1/vol-$i
+              echo "Creating folder /mnt5/refit/r3/vol-$i"
+              mkdir /mnt5/refit/r3/vol-$i 
+              chmod -R 777 /mnt5/refit/r3/vol-$i
             done
             echo "directory structure created"
-            ls -lhtr /mnt5/refit/r1
+            ls -lhtr /mnt5/refit/r3
 
-
-
+          volumeMounts:
+          - name: data-mnt5
+            mountPath: /mnt5
       restartPolicy: Never
 
