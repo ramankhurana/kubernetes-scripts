@@ -1,0 +1,31 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: run-shell-commands-affinity-3
+spec:
+  template:
+    metadata:
+      name: creating-dirs-pod
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: In
+                values:
+                - wcdl2
+      containers:
+        - name: creator-container
+          image: bash #ubuntu
+          #command: ["sh", "-c", "ls -lahtr"]
+          command: ["sh", "-c"]
+          args: 
+          - |
+            ls -lhtr 
+            echo "Hello World!!"
+            df
+
+      restartPolicy: Never
+
