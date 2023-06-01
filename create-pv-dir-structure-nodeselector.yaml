@@ -1,14 +1,15 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: creating-dirs-bash-node-selector-v09
+  name: creating-dirs-bash-node-selector-r8
 spec:
   template:
     metadata:
-      name: creating-dirs-pod
+      name: creating-dirs-pod-r8
     spec:
       nodeSelector:
         refit: enabled
+      serviceAccountName: refit
       volumes:
         - name: data-mnt5
           hostPath:
@@ -24,21 +25,21 @@ spec:
             df
             echo "ls -lhtr "
             ls -lhtr /mnt5
-            mkdir  -p /mnt5/refit/r5
+            mkdir  -p /mnt5/refit/r8
             chmod 777 /mnt5
             chmod 777 /mnt5/refit/  
-            chmod 777 /mnt5/refit/r5  
+            chmod 777 /mnt5/refit/r8  
             ls -lhtr /mnt5
             for i in $(seq 1 32)
             #for ((i=1; i<=31; i++))
             #for i in {1..31}
             do
-              echo "Creating folder /mnt5/refit/r5/vol-$i"
-              mkdir /mnt5/refit/r5/vol-$i 
-              chmod -R 777 /mnt5/refit/r5/vol-$i
+              echo "Creating folder /mnt5/refit/r8/vol-$i"
+              mkdir /mnt5/refit/r8/vol-$i 
+              chmod -R 777 /mnt5/refit/r8/vol-$i
             done
             echo "directory structure created"
-            ls -lhtr /mnt5/refit/r5
+            ls -lhtr /mnt5/refit/r8
 
           volumeMounts:
           - name: data-mnt5
