@@ -1,8 +1,8 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: creating-dirs-pod-r24
-  #namespace: refit-release
+  name: creating-dirs-pod-devr01
+  #namespace: refit-dev1
 spec:
   nodeSelector:
     refit: enabled
@@ -22,21 +22,21 @@ spec:
           df
           echo "ls -lhtr "
           ls -lhtr /mnt5
-          mkdir  -p /mnt5/refit/r24
+          mkdir  -p /mnt5/refit/devr01
           chmod 777 /mnt5
           chmod 777 /mnt5/refit/
-          chmod 777 /mnt5/refit/r24
+          chmod 777 /mnt5/refit/devr01
           ls -lhtr /mnt5
           for i in $(seq 1 32)
           #for ((i=1; i<=31; i++))
           #for i in {1..31}
           do
-            echo "Creating folder /mnt5/refit/r24/vol-$i"
-            mkdir /mnt5/refit/r24/vol-$i
-            chmod -R 777 /mnt5/refit/r24/vol-$i
+            echo "Creating folder /mnt5/refit/devr01/vol-$i"
+            mkdir /mnt5/refit/devr01/vol-$i
+            chmod -R 777 /mnt5/refit/devr01/vol-$i
           done
           echo "directory structure created"
-          ls -lhtr /mnt5/refit/r24
+          ls -lhtr /mnt5/refit/devr01
       volumeMounts:
         - name: data-mnt5
           mountPath: /mnt5
