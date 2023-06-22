@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ubuntu
+  namespace: refit-release
+spec:
+  serviceAccountName: refit
+  containers:
+  - name: ubuntu
+    image: ubuntu
+    command: ["/bin/bash", "-c"]
+    args:
+      - apt-get update &&
+        apt-get install -y git &&
+        apt-get install -y unzip && 
+        git clone https://github.com/ramankhurana/kubernetes-scripts.git &&
+        mv kubernetes-scripts/IoT-streaming-main.zip . && 
+        apt-get install systemctl && 
+        apt-get install 
+        apt-get install -y docker-compose 
+
+  nodeSelector:
+    refit: enabled
+  restartPolicy: Never
