@@ -38,7 +38,30 @@ kube-scheduler-msia-k8s-control-01.ads.northwestern.edu            1/1     Runni
   * sudo apt clean; sudo rm /etc/apt/sources.list.d/kubernetes.list; curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -; echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list; sudo apt-get update
 
  
-  * sudo apt-get install -y kubelet=1.22.9-00 kubeadm=1.22.9-00 kubectl=1.22.9-00
+* sudo apt-get install -y kubelet=1.22.9-00 kubeadm=1.22.9-00 kubectl=1.22.9-00
+* On the clinet node execute the join command:
+   * You will get the command by executing the sudo kubeadm init on the controller
+   * It will be of the form sudo kubeadm join 10.110.1.17:6443 --token w4r39i.5e2v2f5lx1i1v75d \
+        --discovery-token-ca-cert-hash sha256:1e6b78e9ba38624b36b6ad55d1c7f995ef80094b8f0c7802cc5fcc1bc2cdf4cb
+   
+
+* If Calico is not working, delete the pod --> not working
+   * check if it is uncordon, possible taints etc?
+   * kubectl taint nodes my-node node-role.kubernetes.io/master:NoSchedule-  (--> not working)
+       *  Restart daemonset for calico
+       *  kubectl delete daemonset calico-node -n kube-system
+       *  kubectl cordon msia-k8s-control-01.ads.northwestern.edu ## this might not be needed always 
+       *  kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
+    
+   * Calico yaml can ge downloaded from
+      * wget https://docs.projectcalico.org/v3.17/manifests/calico.yaml
+      * kubectl apply -f calico.yaml
+    
+ * If coredns is not working
+    * restart coredns (check taints/no-scheduling on master nodes)
+
+
+## Repeat the steps above on all the clinet nodes 
  
 
 
