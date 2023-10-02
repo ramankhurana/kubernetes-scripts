@@ -61,6 +61,13 @@ kube-scheduler-msia-k8s-control-01.ads.northwestern.edu            1/1     Runni
     * restart coredns (check taints/no-scheduling on master nodes)
 
 
+* On controller you might need to setup the config: [for one time]
+* export KUBECONFIG=/etc/kubernetes/admin.conf
+* sudo chown $(id -u):$(id -g) /etc/kubernetes/admin.conf
+   * For permanent solution:
+   * sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config   ## overwrite (yes)
+   * sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
 ## Repeat the steps above on all the clinet nodes 
  
 
