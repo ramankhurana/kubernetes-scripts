@@ -26,6 +26,18 @@ kube-proxy-khmz9                                                   1/1     Runni
 kube-proxy-tqp9l                                                   1/1     Running   0              14d
 kube-scheduler-msia-k8s-control-01.ads.northwestern.edu            1/1     Running   30 (14h ago)   14d
 
+* Loign to the client node using: ssh user@IP
+* sudo kubeadm reset
+* sudo apt-get purge kubeadm kubelet kubectl
+* sudo apt-get update
+* If there are errors related to <img width="1379" alt="image" src="https://github.com/ramankhurana/kubernetes-scripts/assets/4996609/b7b332e2-bfbc-4103-937b-c7450b78f6b3">
+  * sudo emacs -nw  /etc/apt/sources.list # search for "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable" and comment it as it is present in docker.list
+ 
+  * sudo apt-get install -y kubelet=1.22.9-00 kubeadm=1.22.9-00 kubectl=1.22.9-00
+ 
+
+
+
 
 
 
