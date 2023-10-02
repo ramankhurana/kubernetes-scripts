@@ -32,6 +32,11 @@ kube-scheduler-msia-k8s-control-01.ads.northwestern.edu            1/1     Runni
 * sudo apt-get update
 * If there are errors related to <img width="1379" alt="image" src="https://github.com/ramankhurana/kubernetes-scripts/assets/4996609/b7b332e2-bfbc-4103-937b-c7450b78f6b3">
   * sudo emacs -nw  /etc/apt/sources.list # search for "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable" and comment it as it is present in docker.list
+  * sudo apt-get update
+
+* If the errors are related to: <img width="1510" alt="image" src="https://github.com/ramankhurana/kubernetes-scripts/assets/4996609/9a7b30e8-9540-4a81-9d5c-2ce7fa4bb052">
+  * sudo apt clean; sudo rm /etc/apt/sources.list.d/kubernetes.list; curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -; echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list; sudo apt-get update
+
  
   * sudo apt-get install -y kubelet=1.22.9-00 kubeadm=1.22.9-00 kubectl=1.22.9-00
  
