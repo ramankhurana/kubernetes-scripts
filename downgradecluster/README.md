@@ -68,6 +68,12 @@ kube-scheduler-msia-k8s-control-01.ads.northwestern.edu            1/1     Runni
    * sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config   ## overwrite (yes)
    * sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
+
+#### If kube-system pods are not running on controller 
+ * kubectl uncordon msia-k8s-control-01.ads.northwestern.edu
+ * Look for taints: kubectl describe node msia-k8s-control-01.ads.northwestern.edu | grep Taint
+ * Remove the taints: kubectl taint nodes msia-k8s-control-01.ads.northwestern.edu  node-role.kubernetes.io/master:NoSchedule-
+ * 
 ## Repeat the steps above on all the clinet nodes 
  
 
