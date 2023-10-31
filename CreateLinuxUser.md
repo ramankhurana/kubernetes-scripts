@@ -5,7 +5,7 @@ suppose the new user to be added is `ayush` and the cluster ip address is 10.110
 Login to the cluster as root and follow the steps on cluster
 
 Add the user using: 
-  sudo useradd ayush
+  ```sudo useradd ayush```
 
 Set password for new user using: 
   sudo passwd ayush 
