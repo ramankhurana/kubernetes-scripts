@@ -34,5 +34,19 @@ Copy this key to 10.110.1.1
 
 Confirm that you can login using new user: 
   ssh ayush@10.110.1.1
+  enter the password set for the new user 
 
+If everything is ok so far and steps are followed correctly then we can switch to the old sshd file,. 
+Open the sshd_config file DO NOT allow password authentication [it should look like: PasswordAuthentication no]
+  sudo emacs -nw  /etc/ssh/sshd_config
 
+restart sshd using: 
+  sudo systemctl restart sshd
+
+locally on machine keep the permission to 600 and also on the cluster. 
+
+You are now set to perform password less login 
+
+ssh -i ayush ayush@10.110.1.1 
+
+This should all. 
