@@ -17,7 +17,7 @@ Change permissions:
   ```sudo chown ayush:ayush /home/ayush```
   ```sudo chmod 755 /home/ayush```
 
-Open /etc/passwd  and search for the line with ayush, and change it to "ayush:x:1056:1057::/home/ayush:/bin/sh" 
+Open /etc/passwd  and search for the line with ayush, and change it to ```"ayush:x:1056:1057::/home/ayush:/bin/sh" ```
   ```sudo emacs -nw  /etc/passwd```
 
 Open the sshd_config file and temporarily allow password authentication [it should look like: PasswordAuthentication yes]
